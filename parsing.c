@@ -87,5 +87,5 @@ void	parse_cub_file(int argc, char **argv, t_parsing *parsing)
 	}
 	parsing->number_lines = lines_nbr;
 	read_map(argv[1], parsing);
-	print_parsing_info(parsing);//tester
+	//print_parsing_info(parsing);//tester
 }

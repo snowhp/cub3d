@@ -1,14 +1,14 @@
 #include "cub3d.h"
 
 //tester
-void print_index_info(t_index *index) {
+/*void print_index_info(t_index *index) {
     printf("===== t_index =====\n");
     printf("texture_count: %d\n", index->texture_count);
     printf("color_count:   %d\n", index->color_count);
     printf("map_index:    %d\n", index->map_index);
     //printf("new_line:      %d\n", index->new_line);
     printf("===== End of t_index =====\n");
-}
+}*/
 
 void	process_map_line(t_parsing *parsing, t_index *index, char *line)
 {
@@ -71,7 +71,7 @@ void	read_map(char *file, t_parsing *parsing)
 		get_info_map(parsing, lines, &number, &textures_nbr);
 		free(aux);
 	}
-	print_index_info(&number);//tester
+	//print_index_info(&number);//tester
 	parsing->map[number.map_index] = 0;
 	validate_map_and_player(parsing);
 }

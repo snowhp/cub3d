@@ -1,4 +1,3 @@
-
 RESET	= \033[0m
 BLACK 	= \033[1;30m
 RED 	= \033[1;31m
@@ -17,14 +16,28 @@ ifdef DEBUG
 	CFLAGS += -g -fsanitize=address
 endif
 
+OS = $(shell uname)
+MLX_LINUX = mlx_linux
+MLX_MACOS = mlx_macos
+
+ifeq ($(OS), Darwin)
+    MLX = $(MLX_MACOS)
+    MLXFLAGS = -L ./$(MLX) -lmlx -framework OpenGL -framework AppKit -lm
+else
+    MLX = $(MLX_LINUX)
+    MLXFLAGS = -L ./$(MLX) -lmlx -lm -lX11 -lXext
+endif
+
 NAME = cub3D
 LIBFT = ./libft/libft.a
 INCLUDES = includes
 LIBS = -ltermcap -lreadline -lncurses
 
-SRC = 	check_map.c colors.c error_msg.c initialization.c map_reading.c parsing.c position_map.c textures.c utils.c
+SRC = 	check_map.c colors.c error_msg.c initialization.c map_reading.c parsing.c position_map.c textures.c utils.c get_player_position.c imag_to_xpm.c
 
 SRC-OBJ = $(SRC:.c=.o)
+
+MINILIBX_PATH = $(MLX)
 
 all: $(NAME)
 
@@ -32,10 +45,13 @@ $(LIBFT):
 	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)libft$(RESET)"
 	@$(MAKE) -s -C ./libft
 
-$(NAME): $(SRC-OBJ) $(LIBFT)
+$(MINILIBX_PATH)/libmlx.a:
+	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)MiniLibX$(RESET)"
+	@$(MAKE) -s -C $(MINILIBX_PATH)
+
+$(NAME): $(SRC-OBJ) $(LIBFT) $(MINILIBX_PATH)/libmlx.a
 	@echo "[$(CYAN)Linking$(RESET)] $(GREEN)all$(RESET)"
-	@$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) -o $(NAME) -I $(INCLUDES) $(LIBS)
-	
+	@$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) $(MINILIBX_PATH)/libmlx.a -lm -lX11 -lXext -o $(NAME) -I $(INCLUDES) $(LIBS) $(MLXFLAGS)
 	@echo "[$(GREEN)Done$(RESET)]"
 	
 %.o: %.c
@@ -45,7 +61,9 @@ $(NAME): $(SRC-OBJ) $(LIBFT)
 clean:
 	@echo "[$(RED)Cleaned$(RESET)]"
 	@make -s clean -C ./libft
+	@make -s clean -C ./mlx_macos
 	@$(RM) $(SRC-OBJ)
+	@$(RM) $(MINILIBX_PATH)/libmlx.dylib 
 
 fclean: clean
 	@echo "[$(RED)Cleaned even better$(RESET)] $(GREEN)$(RESET)"

@@ -10,6 +10,17 @@
 # include <sys/wait.h>
 # include "libft/libft.h"
 
+# ifdef __APPLE__
+# include "mlx_macos/mlx.h"
+# else
+# include "mlx_linux/mlx.h"
+# endif
+
+//	Video Resolution
+# define WIN_W	1920.0
+//	Video Resolution
+# define WIN_H	1080.0
+
 typedef struct s_parsing {
 	char	*north_path;    // Path to the north-facing texture.
 	char	*south_path;    // Path to the south-facing texture.
@@ -27,6 +38,90 @@ typedef struct s_index {
 	int	map_index;     // Index for the current line in the maze map.
 	//int	new_line;       // Flag to indicate if a new line is encountered (used during parsing).
 }	t_index;
+
+
+typedef struct s_texture_data
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+
+	int		bpp_n;
+	int		l_len_n;
+	int		endian_n;
+
+	int		bpp_s;
+	int		l_len_s;
+	int		endian_s;
+
+	int		bpp_w;
+	int		l_len_w;
+	int		endian_w;
+
+	int		bpp_e;
+	int		l_len_e;
+	int		endian_e;
+
+	int		bpp_c;
+	int		l_len_c;
+	int		endian_c;
+
+	char	*addr_n;
+	char	*addr_s;
+	char	*addr_w;
+	char	*addr_e;
+	char	*addr_c;
+}	t_texture_data;
+
+typedef struct s_mlx
+{
+	void		*mlx;
+	void		*window;
+	char		**map;
+	int			width;
+	int			height;
+
+	char		*n_img;
+	char		*s_img;
+	char		*e_img;
+	char		*w_img;
+
+	char		*n_xpm;
+	char		*s_xpm;
+	char		*e_xpm;
+	char		*w_xpm;
+
+	double		field_of_view;
+
+	double		x_player;
+	double		y_player;
+
+	double		x_step;
+	double		y_step;
+
+	int			x_m;
+	int			y_m;
+
+	char		dir;
+
+	double		distance;
+	double		corrected_distance;
+
+	int			ceilling;
+	int			floor;
+
+	double		where;
+
+	double		dst_to_projection;
+	double		projection_3d;
+	double		flo_cei;
+	char		*color;
+
+	t_parsing	*parsing;
+	t_texture_data	my_mlx;
+}	t_mlx;
 
 // Check if the file ends with .cub.
 void	check_file_extension(char **argv);
@@ -78,6 +173,10 @@ int	is_texture_line(char *line );
 int	is_invalid_map_character(char c);
 // Check if the line contains '0' characters.
 int	contains_zero_character(char *str);
+// Loads XPM images for rendering and stores their data in the provided window structure.
+void	images_to_xpm(t_mlx *window);
+// Find the initial player position.
+void	get_player_position(t_mlx *window);
 
 //testers
 void print_parsing_info(t_parsing *parsing);
