@@ -17,11 +17,20 @@
 # endif
 
 //	Video Resolution
-# define WIN_W	1920.0
+# define SCREEN_WIDTH	1920.0
 //	Video Resolution
-# define WIN_H	1080.0
+# define SCREEN_HEIGHT	1080.0
+// represents the height of one wall 
+# define WALL_HEIGHT 64.0
+// represents half of one wall
+# define HALF_WALL_HEIGHT 32.0
+// Angle increment in degrees for rotation
+# define ROTATION_ANGLE_INCREMENT	10.0
+// // Amount of pixels to move in each step
+# define PIXELS_PER_MOVE	10.0
 
-typedef struct s_parsing {
+typedef struct s_parsing 
+{
 	char	*north_path;    // Path to the north-facing texture.
 	char	*south_path;    // Path to the south-facing texture.
 	char	*west_path;     // Path to the west-facing texture.
@@ -32,7 +41,8 @@ typedef struct s_parsing {
 	int		number_lines;  // Number of lines in the map.
 }	t_parsing;
 
-typedef struct s_index {
+typedef struct s_index 
+{
 	int	texture_count;         // Counter for texture data (used during parsing).
 	int	color_count;        // Counter for color data (used during parsing).
 	int	map_index;     // Index for the current line in the maze map.
@@ -42,85 +52,86 @@ typedef struct s_index {
 
 typedef struct s_texture_data
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
+	void	*img;               // Pointer to the image data.
+	char	*addr;              // Pointer to the memory address of the image data.
+	int		bits_per_pixel;    // Number of bits per pixel in the image.
+	int		line_size;          // Size of each image line in bytes.
+	int		endian;             // Endianness of the image data.
 
-	int		bpp_n;
-	int		l_len_n;
-	int		endian_n;
+	int		bpp_north;          // Bits per pixel for the north-facing texture.
+	int		l_len_north;        // Line length for the north-facing texture.
+	int		endian_north;       // Endianness for the north-facing texture.
 
-	int		bpp_s;
-	int		l_len_s;
-	int		endian_s;
+	int		bpp_south;          // Bits per pixel for the south-facing texture.
+	int		l_len_south;        // Line length for the south-facing texture.
+	int		endian_south;       // Endianness for the south-facing texture.
 
-	int		bpp_w;
-	int		l_len_w;
-	int		endian_w;
+	int		bpp_west;           // Bits per pixel for the west-facing texture.
+	int		l_len_west;         // Line length for the west-facing texture.
+	int		endian_west;        // Endianness for the west-facing texture.
 
-	int		bpp_e;
-	int		l_len_e;
-	int		endian_e;
+	int		bpp_east;           // Bits per pixel for the east-facing texture.
+	int		l_len_east;         // Line length for the east-facing texture.
+	int		endian_east;        // Endianness for the east-facing texture.
 
-	int		bpp_c;
-	int		l_len_c;
-	int		endian_c;
+	int		bpp_ceiling;        // Bits per pixel for the ceiling texture.
+	int		l_len_ceiling;      // Line length for the ceiling texture.
+	int		endian_ceiling;     // Endianness for the ceiling texture.
 
-	char	*addr_n;
-	char	*addr_s;
-	char	*addr_w;
-	char	*addr_e;
-	char	*addr_c;
+	char	*addr_north;        // Memory address of the north-facing texture data.
+	char	*addr_south;        // Memory address of the south-facing texture data.
+	char	*addr_west;         // Memory address of the west-facing texture data.
+	char	*addr_east;         // Memory address of the east-facing texture data.
+	char	*addr_ceiling;      // Memory address of the ceiling texture data.
 }	t_texture_data;
+
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*window;
-	char		**map;
-	int			width;
-	int			height;
+	void		*mlx;                // Handle to the mlx instance.
+	void		*window;             // Handle to the game window.
+	char		**map;               // 2D array representing the game map.
+	int			width;               // Width of the game window.
+	int			height;              // Height of the game window.
 
-	char		*n_img;
-	char		*s_img;
-	char		*e_img;
-	char		*w_img;
+	char		*north_texture_path; // Path to the north-facing texture image.
+	char		*south_texture_path; // Path to the south-facing texture image.
+	char		*east_texture_path;  // Path to the east-facing texture image.
+	char		*west_texture_path;  // Path to the west-facing texture image.
 
-	char		*n_xpm;
-	char		*s_xpm;
-	char		*e_xpm;
-	char		*w_xpm;
+	char		*n_xpm;              // North texture in XPM format.
+	char		*s_xpm;              // South texture in XPM format.
+	char		*e_xpm;              // East texture in XPM format.
+	char		*w_xpm;              // West texture in XPM format.
 
-	double		field_of_view;
+	double		player_view;         // Player's field of view angle.
 
-	double		x_player;
-	double		y_player;
+	double		x_player;            // Player's x-coordinate.
+	double		y_player;            // Player's y-coordinate.
 
-	double		x_step;
-	double		y_step;
+	double		x_step;              // Step size in the x-direction.
+	double		y_step;              // Step size in the y-direction.
 
-	int			x_m;
-	int			y_m;
+	int			x_m;                 // Map index in the x-direction.
+	int			y_m;                 // Map index in the y-direction.
 
-	char		dir;
+	char		player_direction;    // Direction the player is facing.
 
-	double		distance;
-	double		corrected_distance;
+	double		ray_distance;        // Distance to the intersection point.
+	double		corrected_distance;  // Corrected distance to handle fisheye effect.
 
-	int			ceilling;
-	int			floor;
+	int			ceiling_color;       // Color of the ceiling.
+	int			floor_color;         // Color of the floor.
 
-	double		where;
+	double		ray_position;        // Position of the ray in the view plane.
 
-	double		dst_to_projection;
-	double		projection_3d;
-	double		flo_cei;
-	char		*color;
+	double		distance_to_projection; // Distance from player to the projection plane.
+	double		projection_3d;       // Height of the wall projected onto the screen.
+	double		floor_ceiling_origin; // Origin position for floor and ceiling rendering.
+	char		*color;              // Temporary color storage.
 
-	t_parsing	*parsing;
-	t_texture_data	my_mlx;
+	t_parsing	*parsing;            // Pointer to parsing data.
+	t_texture_data	display_data;      // Texture data for rendering.
 }	t_mlx;
 
 // Check if the file ends with .cub.
@@ -177,6 +188,41 @@ int	contains_zero_character(char *str);
 void	images_to_xpm(t_mlx *window);
 // Find the initial player position.
 void	get_player_position(t_mlx *window);
+// Calculate the distance between player and a wall.
+double	distance_view(double y_player, double x_player, double y_wall, double x_wall);
+// Correct the distance based on fisheye effect.
+double	correct_distance(t_mlx *mlx, double angle);
+//Sets the color of a pixel at the specified coordinates in the image data structure.
+void	set_pixel_color(t_texture_data *data, int x, int y, int color);
+// Set the player's direction based on the map coordinates.
+char	set_directions(double y_coordinate, double x_coordinate, t_mlx *window);
+// Renders a 3D view of the scene based on the provided distance and player direction.
+void	render_3d_view(double distance, int height, t_mlx *mlx, char player_diretion);
+// Retrieves the color data for the north-facing wall texture based on the given index.
+char	*north_texture(t_mlx *mlx, int i);
+// Retrieves the color data for the south-facing wall texture based on the given index.
+char	*south_texture(t_mlx *mlx, int i);
+// Retrieves the color data for the east-facing wall texture based on the given index.
+char	*east_texture(t_mlx *mlx, int i);
+// Retrieves the color data for the west-facing wall texture based on the given index.
+char	*west_texture(t_mlx *mlx, int i);
+// Performing the ray casting process to calculate rendering information.
+void	calculate_Ray_Intersections(t_mlx *window, double angle, int x);
+// Projects rays to render the 3D view of the scene.
+void	projecting_game(t_mlx *window);
+// Moves the player character backward.
+void	move_backword(t_mlx *window);
+// Moves the player character forward.
+void	move_forward(t_mlx *window);
+// Moves the player character left.
+void	move_left(t_mlx *window);
+// Moves the player character right.
+void	move_right(t_mlx *window);
+// Handles keyboard input and triggers corresponding actions.
+int	get_keys(int press, t_mlx *window);
+
+//int	destroy_window(t_mlx *window);
+
 
 //testers
 void print_parsing_info(t_parsing *parsing);

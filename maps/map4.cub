@@ -1,10 +1,10 @@
-NO  ./sprites/north.xpm
-SO  ./sprites/south.xpm
-WE  ./sprites/west.xpm
-EA  ./sprites/east.xpm
+NO sprites/cra.xpm
+SO sprites/east.xpm
+WE sprites/cra.xpm
+EA sprites/east.xpm
 
-F 231,  156,    29
-C 38,141,114  
+F 184,113,39
+C 51,198,227
 
  11111111111111111
 1000000001000000001

@@ -31,3 +31,11 @@ int	is_texture_line(char *line )
 	}
 	return (0);
 }
+/*
+int	destroy_window(t_mlx *window)
+{
+	mlx_destroy_window(window->mlx, window->window);
+	printf("Thanks for playing with us\n");
+	exit(0);
+}
+*/

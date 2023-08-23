@@ -3,13 +3,13 @@
 void	point_of_view(t_mlx *window, char direction)
 {
 	if (direction == 'N')
-		window->field_of_view = 90.0;
+		window->player_view = 90.0;
 	else if (direction == 'S')
-		window->field_of_view = 270.00;
+		window->player_view = 270.00;
 	else if (direction == 'E')
-		window->field_of_view = 360.0;
+		window->player_view = 360.0;
 	else if (direction == 'W')
-		window->field_of_view = 180.0;
+		window->player_view = 180.0;
 }
 
 void	get_player_position(t_mlx *window)
