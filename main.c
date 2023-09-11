@@ -1,11 +1,11 @@
 #include "cub3d.h"
 
 //tester
-/*void print_map(t_parsing *parsing) 
+/*void print_map(t_parsing *parsing)
 {
 	int i = 0;
 	printf("===== Map =====\n");
-	while (i < parsing->number_lines) 
+	while (i < parsing->number_lines)
 	{
 		printf("%s\n", parsing->map[i]);
 		i++;
@@ -16,7 +16,7 @@
 
 //tester struct
 
-void print_mlx_info(const t_mlx *window) 
+void print_mlx_info(const t_mlx *window)
 {
 	printf("===== t_mlx =====\n");
     printf("North Image Path: %s\n", window->north_texture_path);
@@ -35,14 +35,14 @@ void print_mlx_info(const t_mlx *window)
 
 //tester player position
 
-void print_player_info(const t_mlx *window) 
+void print_player_info(const t_mlx *window)
 {
 	printf("===== Player Info =====\n");
     printf("Player Position: (%f, %f)\n", window->y_player, window->x_player);
 }
 
 //tester rendering
-void test_rendering(t_mlx *window) 
+void test_rendering(t_mlx *window)
 {
 	printf("==========RENDERING================\n");
     printf("Testing rendering functions...\n");
@@ -95,7 +95,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		parsing = malloc(sizeof(t_parsing));
-		if (parsing == NULL) 
+		if (parsing == NULL)
 		{
             printf("Memory allocation failed");
         }
@@ -111,9 +111,9 @@ int	main(int argc, char **argv)
 		print_player_info(&window);//tester
 		projecting_game(&window);
 		test_rendering(&window);//tester
-		mlx_hook(window.window, 2, 0, get_keys, &window);
-		//mlx_hook(wind.window, 17, 0, destroy_window, &window);
-		mlx_loop(&window);
+		mlx_hook(window.window, KeyRelease, KeyReleaseMask, get_keys, &window);
+		mlx_hook(window.window, 17, 0, destroy_window, &window);
+		mlx_loop(window.mlx);
 		free(parsing);
     }
 	else

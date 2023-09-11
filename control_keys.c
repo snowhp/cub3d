@@ -21,20 +21,24 @@ void	rotate_right(t_mlx *window)
 int	get_keys(int press, t_mlx *window)
 {
 	mlx_clear_window(window->mlx, window->window);
+	printf("Key detected ");
 	if (press == 124)
 		rotate_right(window);
 	if (press == 123)
 		rotate_left(window);
-	if (press == 2)
+	if (press == 2 || press == D)
 		move_right(window);
-	if (press == 0)
+	if (press == 0 || press == A)
 		move_left(window);
-	if (press == 13)
+	if (press == 13 || press == W)
 		move_forward(window);
-	if (press == 1)
+	if (press == 1 || press == S)
+	{
+		printf("S");
 		move_backword(window);
-	//if (press == 53)
-		//destroy_window(window);
+	}
+	if (press == 65307)
+		destroy_window(window);
 	projecting_game(window);
 	return (0);
 }

@@ -53,7 +53,7 @@ $(NAME): $(SRC-OBJ) $(LIBFT) $(MINILIBX_PATH)/libmlx.a
 	@echo "[$(CYAN)Linking$(RESET)] $(GREEN)all$(RESET)"
 	@$(CC) $(CFLAGS) $(SRC-OBJ) main.c $(LIBFT) $(MINILIBX_PATH)/libmlx.a -lm -lX11 -lXext -o $(NAME) -I $(INCLUDES) $(LIBS) $(MLXFLAGS)
 	@echo "[$(GREEN)Done$(RESET)]"
-	
+
 %.o: %.c
 	@echo "[$(CYAN)Compiling$(RESET)] $(GREEN)$<$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDES)
@@ -63,7 +63,10 @@ clean:
 	@make -s clean -C ./libft
 	@make -s clean -C ./mlx_macos
 	@$(RM) $(SRC-OBJ)
-	@$(RM) $(MINILIBX_PATH)/libmlx.dylib 
+	@$(RM) $(MINILIBX_PATH)/libmlx.dylib
+
+debug: $(SRC-OBJ) $(LIBFT) $(MINILIBX_PATH)/libmlx.a
+	$(CC) $(CFLAGS) -g main.c $(SRC) $(LIBFT) $(MINILIBX_PATH)/libmlx.a -lm -lX11 -lXext -o $(NAME)
 
 fclean: clean
 	@echo "[$(RED)Cleaned even better$(RESET)] $(GREEN)$(RESET)"
@@ -75,10 +78,10 @@ re: fclean all
 run: re
 	@clear
 	@echo "[$(RED)running$(RESET)] $(GREEN)$(RESET)"
-	@./minishell
+	@$(NAME)
 
 valgrind: re
 	@clear
 	@echo "[$(RED)looking for valgrind leaks$(RESET)] $(GREEN)$(RESET)"
 	@sleep 1
-	@valgrind -s --leak-check=full --show-leak-kinds=all --log-file=output.log ./minishell
+	@valgrind -s --leak-check=full --show-leak-kinds=all --log-file=output.log ./cub3D maps/map4.cub

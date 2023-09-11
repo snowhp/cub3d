@@ -5,10 +5,11 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include <string.h> 
+# include <string.h>
 # include <math.h>
 # include <sys/wait.h>
 # include "libft/libft.h"
+# include <X11/X.h>
 
 # ifdef __APPLE__
 # include "mlx_macos/mlx.h"
@@ -20,7 +21,7 @@
 # define SCREEN_WIDTH	1920.0
 //	Video Resolution
 # define SCREEN_HEIGHT	1080.0
-// represents the height of one wall 
+// represents the height of one wall
 # define WALL_HEIGHT 64.0
 // represents half of one wall
 # define HALF_WALL_HEIGHT 32.0
@@ -28,8 +29,12 @@
 # define ROTATION_ANGLE_INCREMENT	10.0
 // // Amount of pixels to move in each step
 # define PIXELS_PER_MOVE	10.0
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
-typedef struct s_parsing 
+typedef struct s_parsing
 {
 	char	*north_path;    // Path to the north-facing texture.
 	char	*south_path;    // Path to the south-facing texture.
@@ -41,7 +46,7 @@ typedef struct s_parsing
 	int		number_lines;  // Number of lines in the map.
 }	t_parsing;
 
-typedef struct s_index 
+typedef struct s_index
 {
 	int	texture_count;         // Counter for texture data (used during parsing).
 	int	color_count;        // Counter for color data (used during parsing).
@@ -221,7 +226,7 @@ void	move_right(t_mlx *window);
 // Handles keyboard input and triggers corresponding actions.
 int	get_keys(int press, t_mlx *window);
 
-//int	destroy_window(t_mlx *window);
+int	destroy_window(t_mlx *window);
 
 
 //testers
