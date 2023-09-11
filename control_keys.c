@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   control_keys.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 15:26:26 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 15:26:26 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	rotate_left(t_mlx *window)
@@ -21,7 +33,6 @@ void	rotate_right(t_mlx *window)
 int	get_keys(int press, t_mlx *window)
 {
 	mlx_clear_window(window->mlx, window->window);
-	printf("Key detected ");
 	if (press == 124)
 		rotate_right(window);
 	if (press == 123)
@@ -33,10 +44,7 @@ int	get_keys(int press, t_mlx *window)
 	if (press == 13 || press == W)
 		move_forward(window);
 	if (press == 1 || press == S)
-	{
-		printf("S");
 		move_backword(window);
-	}
 	if (press == 65307)
 		destroy_window(window);
 	projecting_game(window);

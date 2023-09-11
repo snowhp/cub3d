@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialization.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:37:54 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 14:58:00 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	initialize_parsing(t_parsing *parsing)
@@ -19,4 +31,3 @@ void	initialize_index(t_index *number)
 	number->texture_count = 0;
 	//number->new_line = 0;
 }
-

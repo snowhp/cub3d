@@ -66,10 +66,10 @@ void test_rendering(t_mlx *window)
     window->player_direction = original_player_direction;
 
     // Call the next function
-    // calculate_Ray_Intersections(window, ...);
+    // calculate_ray_intersections(window, ...);
 
     // Print updated values of relevant variables
-    // printf("Player view after calculate_Ray_Intersections: %.2f\n", window->player_view);
+    // printf("Player view after calculate_ray_intersections: %.2f\n", window->player_view);
     // ...
 
     // Restore original values to test the last function
@@ -86,8 +86,7 @@ void test_rendering(t_mlx *window)
     printf("Testing completed!\n");
 }
 
-
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	t_parsing	*parsing;
 	t_mlx		window;
@@ -96,15 +95,13 @@ int	main(int argc, char **argv)
 	{
 		parsing = malloc(sizeof(t_parsing));
 		if (parsing == NULL)
-		{
             printf("Memory allocation failed");
-        }
 		parse_cub_file(argc, argv, parsing);
 		//print_map(parsing);//tester
 		window.parsing = parsing;
 		window.map = parsing->map;
 		window.mlx = mlx_init();
-		window.window = mlx_new_window(window.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+		window.window = mlx_new_window(window.mlx, S_WIDTH, S_HEIGHT, "Cub3D");
 		images_to_xpm(&window);
 		print_mlx_info(&window);//tester
 		get_player_position(&window);

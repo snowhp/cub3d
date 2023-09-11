@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_reading.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:37:52 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 14:57:26 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 //tester
@@ -15,7 +27,8 @@ void	process_map_line(t_parsing *parsing, t_index *index, char *line)
 	if (parsing->north_path == 0 || parsing->south_path == 0
 		|| parsing->west_path == 0 || parsing->east_path == 0)
 	{
-		printf("\033[0;33mError: Missing texture path at line %d\033[0m\n", index->texture_count);
+		printf("\033[0;33mError: Missing texture path at line %d\033[0m\n",\
+			index->texture_count);
 		exit(0);
 	}
 	if (parsing->ceiling_color == -1
