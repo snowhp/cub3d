@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_player_position.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:37:59 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 15:24:57 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	point_of_view(t_mlx *window, char direction)
@@ -23,7 +35,8 @@ void	get_player_position(t_mlx *window)
 		j = 0;
 		while (window->map[i][j])
 		{
-			if (window->map[i][j] == 'N' || window->map[i][j] == 'S' || window->map[i][j] == 'W' || window->map[i][j] == 'E')
+			if (window->map[i][j] == 'N' || window->map[i][j] == 'S' || \
+				window->map[i][j] == 'W' || window->map[i][j] == 'E')
 			{
 				point_of_view(window, window->map[i][j]);
 				window->map[i][j] = '0';

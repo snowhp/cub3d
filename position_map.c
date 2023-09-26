@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   position_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:37:42 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 14:55:58 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	is_invalid_zero_position(t_parsing *parsing, int index, char *line, int i)
@@ -14,7 +26,6 @@ int	is_invalid_zero_position(t_parsing *parsing, int index, char *line, int i)
 	}
 	return (0);
 }
-
 
 void	is_invalid_player_position(t_parsing *parsing, int i, int index)
 {

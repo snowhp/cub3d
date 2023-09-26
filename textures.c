@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:36:53 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 14:43:59 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 char	*get_path_check(char *line, char *ser)
@@ -21,15 +33,15 @@ char	*get_path_check(char *line, char *ser)
 	return (line);
 }
 
-void	assign_texture_path(t_parsing *parsing, char *line, int *number, t_index *index )
+void	assign_texture_path(t_parsing *parsing, char *line, int *n, t_index *i)
 {
-	if (*number > 3)
+	if (*n > 3)
 	{
 		free(line);
-		printf("\033[1;31mERROR: Exceded maximum number of textures allowed.\033[0m\n");
+		printf("\033[1;31mERROR: Exceded maximum number"
+			"of textures allowed.\033[0m\n");
 		exit(0);
 	}
-	//printf("Texture1 %d: %s\n", *number, line);
 	if (!ft_strncmp(line, "SO ", 3))
 		parsing->south_path = get_path_check(line, "SO");
 	else if (!ft_strncmp(line, "NO ", 3))
@@ -43,7 +55,7 @@ void	assign_texture_path(t_parsing *parsing, char *line, int *number, t_index *i
 		free(line);
 		return ;
 	}
-	(*number)++;
-	index->texture_count = (*number);
+	(*n)++;
+	i->texture_count = (*n);
 	//printf("number of textures: %d\n", index->texture_count);
 }

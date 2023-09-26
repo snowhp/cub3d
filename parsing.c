@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/11 14:37:45 by tde-sous          #+#    #+#             */
+/*   Updated: 2023/09/11 14:56:15 by tde-sous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 //testers!!!!
 
-void print_parsing_info(t_parsing *parsing) {
-    printf("===== t_parsing =====\n");
-    printf("north_path:    %s\n", parsing->north_path);
-    printf("south_path:    %s\n", parsing->south_path);
-    printf("west_path:     %s\n", parsing->west_path);
-    printf("east_path:     %s\n", parsing->east_path);
-    printf("ceiling_color: %d\n", parsing->ceiling_color);
-    printf("floor_color:   %d\n", parsing->floor_color);
-    printf("number_lines:  %d\n", parsing->number_lines);
-    printf("===== End of t_parsing =====\n");
+void	print_parsing_info(t_parsing *parsing)
+{
+	printf("===== t_parsing =====\n");
+	printf("north_path:    %s\n", parsing->north_path);
+	printf("south_path:    %s\n", parsing->south_path);
+	printf("west_path:     %s\n", parsing->west_path);
+	printf("east_path:     %s\n", parsing->east_path);
+	printf("ceiling_color: %d\n", parsing->ceiling_color);
+	printf("floor_color:   %d\n", parsing->floor_color);
+	printf("number_lines:  %d\n", parsing->number_lines);
+	printf("===== End of t_parsing =====\n");
 }
 
 //final testers!!
