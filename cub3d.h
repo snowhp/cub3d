@@ -10,6 +10,7 @@
 # include <sys/wait.h>
 # include "libft/libft.h"
 # include <X11/X.h>
+# include <X11/keysym.h>
 
 # ifdef __APPLE__
 # include "mlx_macos/mlx.h"
