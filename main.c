@@ -86,6 +86,24 @@ void test_rendering(t_mlx *window)
     printf("Testing completed!\n");
 }
 
+void	put_map(t_mlx *window)
+{
+	int	x = 0;
+	int	y = 0;
+
+	while (window->map[x])
+	{
+		while (window->map[x][y])
+		{
+			printf("%c", window->map[x][y]);
+			y++;
+		}
+		printf("\n");
+		y = 0;
+		x++;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_parsing	*parsing;
@@ -107,6 +125,7 @@ int main(int argc, char **argv)
 		get_player_position(&window);
 		print_player_info(&window);//tester
 		projecting_game(&window);
+		put_map(&window);
 		test_rendering(&window);//tester
 		mlx_hook(window.window, KeyRelease, KeyReleaseMask, get_keys, &window);
 		mlx_hook(window.window, 17, 0, destroy_window, &window);

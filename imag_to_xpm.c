@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:57 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 15:24:29 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:16:28 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ void	images_to_xpm(t_mlx *w)
 		printf ("Erro: Loading Textures\n");
 		exit(0);
 	}
-	images_to_xpm2(w);
-}
-
-void	images_to_xpm2(t_mlx *w)
-{
 	w->display_data.addr_north = mlx_get_data_addr(w->n_xpm, &w->display_data.\
 		bpp_north, &w->display_data.l_len_north, &w->display_data.endian_north);
 	w->display_data.addr_south = mlx_get_data_addr(w->s_xpm, &w->display_data.\
@@ -48,3 +43,4 @@ void	images_to_xpm2(t_mlx *w)
 	w->display_data.addr_east = mlx_get_data_addr(w->e_xpm, &w->display_data.\
 	bpp_east, &w->display_data.l_len_east, &w->display_data.endian_east);
 }
+

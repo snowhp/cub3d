@@ -19,9 +19,9 @@
 # endif
 
 //	Video Resolution
-# define SCREEN_WIDTH	1920.0
+# define S_WIDTH	1920.0
 //	Video Resolution
-# define SCREEN_HEIGHT	1080.0
+# define S_HEIGHT	1080.0
 // represents the height of one wall
 # define WALL_HEIGHT 64.0
 // represents half of one wall
@@ -213,7 +213,7 @@ char	*east_texture(t_mlx *mlx, int i);
 // Retrieves the color data for the west-facing wall texture based on the given index.
 char	*west_texture(t_mlx *mlx, int i);
 // Performing the ray casting process to calculate rendering information.
-void	calculate_Ray_Intersections(t_mlx *window, double angle, int x);
+void	calculate_ray_intersections(t_mlx *window, double angle, int x);
 // Projects rays to render the 3D view of the scene.
 void	projecting_game(t_mlx *window);
 // Moves the player character backward.
