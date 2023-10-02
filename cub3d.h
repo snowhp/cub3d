@@ -109,7 +109,8 @@ typedef struct s_mlx
 	char		*s_xpm;              // South texture in XPM format.
 	char		*e_xpm;              // East texture in XPM format.
 	char		*w_xpm;              // West texture in XPM format.
-	void		*tile;
+	void		*tile;	//Pointer to XPM file
+	void		*character;	//Pointer to XPM file
 
 	double		player_view;         // Player's field of view angle.
 

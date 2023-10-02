@@ -1,7 +1,7 @@
-NO sprites/cra.xpm
-SO sprites/east.xpm
-WE sprites/cra.xpm
-EA sprites/east.xpm
+NO sprites/box1.xpm
+SO sprites/box2.xpm
+WE sprites/box3.xpm
+EA sprites/box4.xpm
 
 F 184,113,39
 C 51,198,227

@@ -86,6 +86,7 @@ void test_rendering(t_mlx *window)
     printf("Testing completed!\n");
 }
 
+//Test map print
 void	put_map(t_mlx *window)
 {
 	int	x = 0;
@@ -107,19 +108,9 @@ void	put_map(t_mlx *window)
 void	*ft_imageload(t_mlx *window, char *path)
 {
 	void	*imagep;
-	int	size = 50;
+	int	size = 40;
 
-	window->up = 0;
-	window->down = 0;
-	window->left = 0;
-	window->right = 0;
-	window->rot_r = 0;
-	window->rot_l = 0;
 	imagep = mlx_xpm_file_to_image(window->mlx, path, &size, &size);
-	window->display_data.img = mlx_new_image(window->mlx, S_WIDTH, S_HEIGHT);
-	window->display_data.addr = mlx_get_data_addr(window->display_data.img, \
-		&window->display_data.bits_per_pixel, &window->display_data.line_size, \
-		&window->display_data.endian);
 	return (imagep);
 }
 
@@ -132,7 +123,23 @@ int	game_loop(t_mlx *window)
 		&window->display_data.bits_per_pixel, &window->display_data.line_size, \
 		&window->display_data.endian);
 	projecting_game(window);
+	mlx_put_image_to_window(window->mlx, window->window, \
+		window->tile, 40 * 0, 40 * 0);
 	return (0);
+}
+
+void	load_extra(t_mlx *window)
+{
+	window->up = 0;
+	window->down = 0;
+	window->left = 0;
+	window->right = 0;
+	window->rot_r = 0;
+	window->rot_l = 0;
+	window->display_data.img = mlx_new_image(window->mlx, S_WIDTH, S_HEIGHT);
+	window->display_data.addr = mlx_get_data_addr(window->display_data.img, \
+		&window->display_data.bits_per_pixel, &window->display_data.line_size, \
+		&window->display_data.endian);
 }
 
 int main(int argc, char **argv)
@@ -144,7 +151,7 @@ int main(int argc, char **argv)
 	{
 		parsing = malloc(sizeof(t_parsing));
 		if (parsing == NULL)
-            printf("Memory allocation failed");
+		printf("Memory allocation failed");
 		parse_cub_file(argc, argv, parsing);
 		//print_map(parsing);//tester
 		window.parsing = parsing;
@@ -155,7 +162,9 @@ int main(int argc, char **argv)
 		//print_mlx_info(&window);//tester
 		get_player_position(&window);
 		//print_player_info(&window);//tester
+		load_extra(&window);
 		window.tile = ft_imageload(&window, "sprites/wall.xpm");
+		window.character = ft_imageload(&window, "sprites/char.xpm");
 		projecting_game(&window);
 		put_map(&window);
 		//test_rendering(&window);//tester
@@ -165,7 +174,7 @@ int main(int argc, char **argv)
 		mlx_loop_hook(window.mlx, &game_loop, &window);
 		mlx_loop(window.mlx);
 		free(parsing);
-    }
+	}
 	else
 		printf("The number of Arguments need to be 2\n");
 }
