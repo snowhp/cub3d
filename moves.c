@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:48 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:57:16 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:15:42 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	move_forward(t_mlx *window)
 	}
 }
 
-void	move_backword(t_mlx *window)
+void	move_backward(t_mlx *window)
 {
 	double	y_step;
 	double	x_step;
@@ -86,4 +86,20 @@ void	move_backword(t_mlx *window)
 		window->x_player -= x_step;
 		window->y_player -= y_step;
 	}
+}
+
+void	move_player(t_mlx *window)
+{
+	if (window->rot_l == 1)
+		rotate_left(window);
+	if (window->rot_r == 1)
+		rotate_right(window);
+	if (window->right == 1)
+		move_right(window);
+	if (window->left == 1)
+		move_left(window);
+	if (window->up == 1)
+		move_forward(window);
+	if (window->down == 1)
+		move_backward(window);
 }

@@ -109,6 +109,7 @@ typedef struct s_mlx
 	char		*s_xpm;              // South texture in XPM format.
 	char		*e_xpm;              // East texture in XPM format.
 	char		*w_xpm;              // West texture in XPM format.
+	void		*tile;
 
 	double		player_view;         // Player's field of view angle.
 
@@ -122,6 +123,14 @@ typedef struct s_mlx
 	int			y_m;                 // Map index in the y-direction.
 
 	char		player_direction;    // Direction the player is facing.
+	int		up;//Move Up trigger
+	int		down;//Move Down trigger
+	int		left;//Move Left trigger
+	int		right;//Move Right trigger
+	int		rot_l;//Rotate Left trigger
+	int		rot_r;//Rotate Right trigger
+
+
 
 	double		ray_distance;        // Distance to the intersection point.
 	double		corrected_distance;  // Corrected distance to handle fisheye effect.
@@ -217,13 +226,17 @@ void	calculate_ray_intersections(t_mlx *window, double angle, int x);
 // Projects rays to render the 3D view of the scene.
 void	projecting_game(t_mlx *window);
 // Moves the player character backward.
-void	move_backword(t_mlx *window);
+void	move_backward(t_mlx *window);
 // Moves the player character forward.
 void	move_forward(t_mlx *window);
 // Moves the player character left.
 void	move_left(t_mlx *window);
 // Moves the player character right.
 void	move_right(t_mlx *window);
+void	move_player(t_mlx *window);
+void	rotate_left(t_mlx *window);
+void	rotate_right(t_mlx *window);
+int	release_keys(int press, t_mlx *window);
 // Handles keyboard input and triggers corresponding actions.
 int	get_keys(int press, t_mlx *window);
 

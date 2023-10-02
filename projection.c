@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:26 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:52:55 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:09:20 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ void	projecting_game(t_mlx *window)
 
 	window->height = -1;
 	angle = window->player_view - HALF_WALL_HEIGHT;
-	window->display_data.img = mlx_new_image(window->mlx, S_WIDTH, S_HEIGHT);
-	window->display_data.addr = mlx_get_data_addr(window->display_data.img, \
-		&window->display_data.bits_per_pixel, &window->display_data.line_size, \
-		&window->display_data.endian);
 	while (++window->height < S_WIDTH)
 	{
 		calculate_ray_intersections(window, angle, window->height);
