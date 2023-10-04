@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:57 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/26 11:16:28 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:07:53 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ void	images_to_xpm(t_mlx *w)
 	bpp_west, &w->display_data.l_len_west, &w->display_data.endian_west);
 	w->display_data.addr_east = mlx_get_data_addr(w->e_xpm, &w->display_data.\
 	bpp_east, &w->display_data.l_len_east, &w->display_data.endian_east);
+	w.tile = ft_imageload(&window, "sprites/dirt.xpm");
+	w.tree = ft_imageload(&window, "sprites/tree.xpm");
+	w.north_char = ft_imageload(&window, "sprites/North.xpm");
+	w.south_char = ft_imageload(&window, "sprites/South.xpm");
+	w.east_char = ft_imageload(&window, "sprites/East.xpm");
+	w.west_char = ft_imageload(&window, "sprites/West.xpm");
 }
 

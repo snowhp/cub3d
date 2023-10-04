@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:26 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/02 14:09:20 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/04 09:48:14 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	projecting_game(t_mlx *window)
 	}
 	mlx_put_image_to_window(window->mlx, window->window, \
 		window->display_data.img, 0, 0);
+	put_minimap(window);
 }
 
 void	draw_textures(t_mlx *mlx, int i, char player_diretion)

@@ -110,7 +110,11 @@ typedef struct s_mlx
 	char		*e_xpm;              // East texture in XPM format.
 	char		*w_xpm;              // West texture in XPM format.
 	void		*tile;	//Pointer to XPM file
-	void		*character;	//Pointer to XPM file
+	void		*tree;	//Pointer to XPM file
+	void		*north_char;	//Pointer to XPM file
+	void		*south_char;	//Pointer to XPM file
+	void		*east_char;	//Pointer to XPM file
+	void		*west_char;	//Pointer to XPM file
 
 	double		player_view;         // Player's field of view angle.
 
@@ -240,6 +244,7 @@ void	rotate_right(t_mlx *window);
 int	release_keys(int press, t_mlx *window);
 // Handles keyboard input and triggers corresponding actions.
 int	get_keys(int press, t_mlx *window);
+void	put_minimap(t_mlx *window);
 
 int	destroy_window(t_mlx *window);
 

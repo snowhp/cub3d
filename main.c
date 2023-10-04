@@ -86,25 +86,6 @@ void test_rendering(t_mlx *window)
     printf("Testing completed!\n");
 }
 
-//Test map print
-void	put_map(t_mlx *window)
-{
-	int	x = 0;
-	int	y = 0;
-
-	while (window->map[x])
-	{
-		while (window->map[x][y])
-		{
-			printf("%c", window->map[x][y]);
-			y++;
-		}
-		printf("\n");
-		y = 0;
-		x++;
-	}
-}
-
 void	*ft_imageload(t_mlx *window, char *path)
 {
 	void	*imagep;
@@ -123,8 +104,6 @@ int	game_loop(t_mlx *window)
 		&window->display_data.bits_per_pixel, &window->display_data.line_size, \
 		&window->display_data.endian);
 	projecting_game(window);
-	mlx_put_image_to_window(window->mlx, window->window, \
-		window->tile, 40 * 0, 40 * 0);
 	return (0);
 }
 
@@ -163,10 +142,7 @@ int main(int argc, char **argv)
 		get_player_position(&window);
 		//print_player_info(&window);//tester
 		load_extra(&window);
-		window.tile = ft_imageload(&window, "sprites/wall.xpm");
-		window.character = ft_imageload(&window, "sprites/char.xpm");
 		projecting_game(&window);
-		put_map(&window);
 		//test_rendering(&window);//tester
 		mlx_hook(window.window, KeyPress, KeyPressMask, get_keys, &window);
 		mlx_hook(window.window, KeyRelease, KeyReleaseMask, release_keys, &window);
