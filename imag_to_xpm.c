@@ -6,11 +6,20 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:57 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/04 12:07:53 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:14:06 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	*ft_imageload(t_mlx *window, char *path)
+{
+	void	*imagep;
+	int	size = 40;
+
+	imagep = mlx_xpm_file_to_image(window->mlx, path, &size, &size);
+	return (imagep);
+}
 
 void	images_to_xpm(t_mlx *w)
 {
@@ -42,11 +51,11 @@ void	images_to_xpm(t_mlx *w)
 	bpp_west, &w->display_data.l_len_west, &w->display_data.endian_west);
 	w->display_data.addr_east = mlx_get_data_addr(w->e_xpm, &w->display_data.\
 	bpp_east, &w->display_data.l_len_east, &w->display_data.endian_east);
-	w.tile = ft_imageload(&window, "sprites/dirt.xpm");
-	w.tree = ft_imageload(&window, "sprites/tree.xpm");
-	w.north_char = ft_imageload(&window, "sprites/North.xpm");
-	w.south_char = ft_imageload(&window, "sprites/South.xpm");
-	w.east_char = ft_imageload(&window, "sprites/East.xpm");
-	w.west_char = ft_imageload(&window, "sprites/West.xpm");
+	w->tile = ft_imageload(w, "sprites/dirt.xpm");
+	w->tree = ft_imageload(w, "sprites/tree.xpm");
+	w->north_char = ft_imageload(w, "sprites/North.xpm");
+	w->south_char = ft_imageload(w, "sprites/South.xpm");
+	w->east_char = ft_imageload(w, "sprites/East.xpm");
+	w->west_char = ft_imageload(w, "sprites/West.xpm");
 }
 

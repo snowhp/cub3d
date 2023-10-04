@@ -86,15 +86,6 @@ void test_rendering(t_mlx *window)
     printf("Testing completed!\n");
 }
 
-void	*ft_imageload(t_mlx *window, char *path)
-{
-	void	*imagep;
-	int	size = 40;
-
-	imagep = mlx_xpm_file_to_image(window->mlx, path, &size, &size);
-	return (imagep);
-}
-
 int	game_loop(t_mlx *window)
 {
 	move_player(window);
