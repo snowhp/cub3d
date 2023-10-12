@@ -1,7 +1,7 @@
-NO  ./sprites/coin.xpm
-SO  ./sprites/coin.xpm
-WE  ./sprites/coin.xpm
-EA  ./sprites/coin.xpm
+NO sprites/box1.xpm
+SO sprites/box2.xpm
+WE sprites/box3.xpm
+EA sprites/box4.xpm
 
 F 000,000,000
 C 000,000,000
