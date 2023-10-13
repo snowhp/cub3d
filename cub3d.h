@@ -55,6 +55,15 @@ typedef struct s_index
 	//int	new_line;       // Flag to indicate if a new line is encountered (used during parsing).
 }	t_index;
 
+typedef struct s_minimap
+{
+	int	x;
+	int	y;
+	int	print_x;
+	int	print_y;
+	int	printed_x;
+	int	printed_y;
+}	t_minimap;
 
 typedef struct s_texture_data
 {
@@ -241,12 +250,16 @@ void	move_right(t_mlx *window);
 void	move_player(t_mlx *window);
 void	rotate_left(t_mlx *window);
 void	rotate_right(t_mlx *window);
+// Handles keyboard input and triggers corresponding actions.
 int	release_keys(int press, t_mlx *window);
 // Handles keyboard input and triggers corresponding actions.
 int	get_keys(int press, t_mlx *window);
+// Print minimap to the screen
 void	put_minimap(t_mlx *window);
-
+int	game_loop(t_mlx *window);
+void	hooks(t_mlx *window);
 int	destroy_window(t_mlx *window);
+
 
 
 //testers

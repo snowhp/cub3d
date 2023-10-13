@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:36:53 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:43:59 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:11:13 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,4 @@ void	assign_texture_path(t_parsing *parsing, char *line, int *n, t_index *i)
 	}
 	(*n)++;
 	i->texture_count = (*n);
-	//printf("number of textures: %d\n", index->texture_count);
 }

@@ -6,21 +6,11 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:52 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:57:26 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:12:18 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//tester
-/*void print_index_info(t_index *index) {
-    printf("===== t_index =====\n");
-    printf("texture_count: %d\n", index->texture_count);
-    printf("color_count:   %d\n", index->color_count);
-    printf("map_index:    %d\n", index->map_index);
-    //printf("new_line:      %d\n", index->new_line);
-    printf("===== End of t_index =====\n");
-}*/
 
 void	process_map_line(t_parsing *parsing, t_index *index, char *line)
 {
@@ -84,7 +74,6 @@ void	read_map(char *file, t_parsing *parsing)
 		get_info_map(parsing, lines, &number, &textures_nbr);
 		free(aux);
 	}
-	//print_index_info(&number);//tester
 	parsing->map[number.map_index] = 0;
 	validate_map_and_player(parsing);
 }

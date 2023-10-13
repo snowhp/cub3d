@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:38:14 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:39:30 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/13 09:54:05 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	update_color_components(char digit, int *comma, int *nbr, int *rgb)
 		(*nbr) = (*nbr) * 10 + digit - '0';
 	else if (digit == ',')
 	{
-		if ((*comma) < 3)//se o número de vírgulas for menor que 3
-			rgb[(*comma)] = *nbr;//guardo o valor do número na posição correspondente ao número de vírgulas
+		if ((*comma) < 3)
+			rgb[(*comma)] = *nbr;
 		(*comma)++;
 		(*nbr) = 0;
 	}
@@ -57,9 +57,9 @@ int	get_color(char *line, char *str)
 	char	*keep_color;
 	int		color;
 
-	color = -1;//ainda n foi atribuido nenhum valor
+	color = -1;
 	keep_color = ft_strtrim(line, str);
-	if (keep_color[0] != ',' && keep_color[ft_strlen(keep_color) - 1] != ',')//se a linha não começar e nem terminar com uma vírgula, significa que não há 3 valores de cor
+	if (keep_color[0] != ',' && keep_color[ft_strlen(keep_color) - 1] != ',')
 		color = validate_color(keep_color);
 	free(line);
 	free(keep_color);

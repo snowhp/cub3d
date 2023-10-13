@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:45 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 14:56:15 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:29:40 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,4 @@ void	parse_cub_file(int argc, char **argv, t_parsing *parsing)
 	}
 	parsing->number_lines = lines_nbr;
 	read_map(argv[1], parsing);
-	//print_parsing_info(parsing);//tester
 }
