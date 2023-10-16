@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:55:32 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/13 10:02:22 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:58:38 by firibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		parsing = malloc(sizeof(t_parsing));
+		parsing->north_path = NULL;
+		parsing->south_path = NULL;
+		parsing->west_path = NULL;
+		parsing->east_path = NULL;
+		parsing->map = NULL;
+		
 		if (parsing == NULL)
 			printf("Memory allocation failed");
 		parse_cub_file(argc, argv, parsing);

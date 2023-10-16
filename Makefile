@@ -9,7 +9,7 @@ CYAN 	= \033[1;36m
 WHITE 	= \033[1;37m
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 RM = rm -rf
 
 ifdef DEBUG
@@ -31,7 +31,6 @@ endif
 NAME = cub3D
 LIBFT = ./libft/libft.a
 INCLUDES = includes
-LIBS = -ltermcap -lreadline -lncurses
 
 SRC = 	check_map.c colors.c error_msg.c initialization.c map_reading.c parsing.c position_map.c textures.c utils.c get_player_position.c imag_to_xpm.c projection.c projection_utils.c directions.c projections_textures.c control_keys.c moves.c minimap.c
 
@@ -75,13 +74,12 @@ fclean: clean
 
 re: fclean all
 
-run: re
-	@clear
-	@echo "[$(RED)running$(RESET)] $(GREEN)$(RESET)"
-	@$(NAME)
+MAP = maps/no_map.cub
 
-valgrind: re
-	@clear
-	@echo "[$(RED)looking for valgrind leaks$(RESET)] $(GREEN)$(RESET)"
-	@sleep 1
-	@valgrind -s --leak-check=full --show-leak-kinds=all --log-file=output.log ./cub3D maps/map4.cub
+# Define o comando do Valgrind
+VALGRIND_CMD = valgrind --leak-check=full --show-leak-kinds=all --log-file=output.log
+
+# Alvo para verificar vazamentos de memória
+leaks:
+	@echo "Checking memory leaks..."
+	$(VALGRIND_CMD) ./$(NAME) $(MAP)

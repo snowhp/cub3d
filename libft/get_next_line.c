@@ -3,120 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
+/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 22:16:59 by filipa            #+#    #+#             */
-/*   Updated: 2023/07/19 16:27:46 by filipa           ###   ########.fr       */
+/*   Updated: 2023/10/14 21:24:23 by firibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup2(char *src)
+char	*get_leftover(char *memory)
 {
-	char	*ptr;
-	int		len;
-	int		i;
+	char	*leftover;
+	size_t	jump;
+	size_t	len;
 
-	i = 0;
-	len = ft_strlen(src);
-	ptr = malloc((len + 1) * sizeof (char));
-	if (ptr == NULL)
-		return (0);
-	while (src[i] != '\0')
-	{
-		ptr[i] = src[i];
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	len = ft_strclen(memory, '\0');
+	jump = ft_strclen(memory, '\n');
+	if (memory[jump] == '\n')
+		jump++;
+	leftover = ft_strndup(memory + jump, len - jump + 1);
+	if (!leftover)
+		return (NULL);
+	free(memory);
+	return (leftover);
 }
 
-int	check_fun(char *s)
+char	*get_line(char *memory)
 {
-	int	index;
-
-	if (!s)
-		return (-1);
-	index = 0;
-	while (s[index] != '\0')
-	{
-		if (s[index] == '\n')
-			return (index);
-		index++;
-	}
-	return (-1);
-}
-
-char	*line_remainder(char *src, int startindex)
-{
-	char	*tmp;
 	char	*line;
+	size_t	len;
 
-	tmp = src;
-	line = ft_strdup2(src + startindex + 1);
-	free(tmp);
+	len = ft_strclen(memory, '\n');
+	if (memory[len] == '\n')
+		len++;
+	line = ft_strndup(memory, len);
+	if (!line)
+		return (NULL);
 	return (line);
 }
 
-char	*read_join(int fd, char *str, int *k)
+char	*store_chunks(int fd, char *memory)
 {
-	char	*ptr;
+	char	*chunk;
+	ssize_t	bytes;
 
-	*k = 1;
-	ptr = malloc(1 + 1);
-	while (check_fun(str) == -1 && *k != 0)
+	bytes = 1;
+	chunk = (char *)malloc(BUFFER_SIZE + 1);
+	if (!chunk)
+		return (NULL);
+	while (bytes > 0 && !ft_strchr_mod(memory, '\n'))
 	{
-		*k = read(fd, ptr, 1);
-		if (*k == -1)
+		bytes = read(fd, chunk, BUFFER_SIZE);
+		if (bytes == 0)
+			break ;
+		if (bytes == -1)
 		{
-			free(ptr);
+			free(chunk);
 			return (NULL);
 		}
-		ptr[*k] = '\0';
-		str = ft_strjjoin(str, ptr);
+		chunk[bytes] = '\0';
+		memory = ft_strjoin_mod(memory, chunk);
 	}
-	free(ptr);
-	return (str);
+	free(chunk);
+	if (ft_strclen(memory, '\0') > 0)
+		return (memory);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
-	int			k;
+	static char	*memory;
 	char		*line;
-	int			index_line;
 
-	str = read_join(fd, str, &k);
-	if (str == NULL)
-		return (0);
-	if (ft_strlen(str) == 0 && k == 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	memory = store_chunks(fd, memory);
+	if (!memory)
+		return (NULL);
+	line = get_line(memory);
+	memory = get_leftover(memory);
+	if (!memory[0])
 	{
-		free(str);
-		str = NULL;
-		return (0);
+		free(memory);
+		memory = NULL;
 	}
-	index_line = check_fun(str);
-	if (index_line == -1)
-	{
-		line = str;
-		str = (NULL);
-		return (line);
-	}
-	line = ft_substr2(str, 0, index_line + 1);
-	str = line_remainder(str, index_line);
 	return (line);
 }
-
-/*
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/select.h>
-
-int	main(void)
-{
-    printf("FD_SETSIZE=%d\n", FD_SETSIZE);
-    return (0);
-}
-
-*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_reading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:52 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/13 10:12:18 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/14 21:44:51 by firibeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,32 @@ void	get_info_map(t_parsing *parsing,
 	}
 	else
 		free(aux);
-	free(line);
+	//free(line);
 }
 
-void	read_map(char *file, t_parsing *parsing)
+void read_map(char *file, t_parsing *parsing)
 {
-	char	*lines;
-	int		fd;
-	char	*aux;
-	int		textures_nbr;
-	t_index	number;
+    char *lines;
+    int fd;
+    int textures_nbr;
+    t_index number;
 
-	textures_nbr = 0;
-	lines = 0;
-	initialize_index(&number);
-	fd = open(file, O_RDONLY);
-	while (1)
-	{
-		lines = get_next_line(fd);
-		aux = lines;
-		if (lines == 0)
-			break ;
-		if (lines[0] == '\n' && number.map_index != 0)
-			error_map(parsing);
-		lines = ft_strtrim(lines, "\n");
-		get_info_map(parsing, lines, &number, &textures_nbr);
-		free(aux);
-	}
-	parsing->map[number.map_index] = 0;
-	validate_map_and_player(parsing);
+    textures_nbr = 0;
+    initialize_index(&number);
+    fd = open(file, O_RDONLY);
+    while (1)
+    {
+        lines = get_next_line(fd);
+        if (lines == 0)
+            break;
+        if (lines[0] == '\n' && number.map_index != 0)
+            error_map(parsing);
+        char *trimmed_lines = ft_strtrim(lines, "\n");
+        get_info_map(parsing, trimmed_lines, &number, &textures_nbr);
+        free(trimmed_lines);
+        free(lines); // Liberar a memória original
+    }
+    parsing->map[number.map_index] = 0;
+    validate_map_and_player(parsing);
 }
+

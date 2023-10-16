@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: filipa <filipa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:26 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/04 09:48:14 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/15 11:27:47 by filipa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#define MIN_DISTANCE_FROM_WALL 20
 
 void	projecting_game(t_mlx *window)
 {
@@ -43,7 +45,7 @@ void	draw_textures(t_mlx *mlx, int i, char player_diretion)
 		set_pixel_color(&mlx->display_data, mlx->height, mlx->width,
 			*(unsigned int *)east_texture(mlx, i));
 }
-
+/*
 void	calculate_ray_intersections(t_mlx *w, double angle, int x)
 {
 	double	px;
@@ -71,6 +73,40 @@ void	calculate_ray_intersections(t_mlx *w, double angle, int x)
 		py += w->y_step;
 	}
 	render_3d_view(correct_distance(w, angle), x, w, w->player_direction);
+}
+*/
+
+void calculate_ray_intersections(t_mlx *w, double angle, int x)
+{
+    double px;
+    double py;
+
+    w->player_direction = '\0';
+    px = w->x_player;
+    py = w->y_player;
+    w->x_step = cos(angle * (M_PI / 180));
+    w->y_step = sin(angle * (M_PI / 180));
+    while (1)
+    {
+        w->y_m = (int)(py / WALL_HEIGHT);
+        w->x_m = (int)(px / WALL_HEIGHT);
+        if (w->map[w->y_m][w->x_m] == '1' || w->map[(int)((py - w->y_step) / WALL_HEIGHT)][w->x_m] == '1' || w->map[w->y_m][(int)((px - w->x_step) / WALL_HEIGHT)] == '1')
+        {
+            double distance = distance_view(w->y_player, w->x_player, py, px);
+            if (distance < MIN_DISTANCE_FROM_WALL)
+            {
+                px = w->x_player + MIN_DISTANCE_FROM_WALL * w->x_step;
+                py = w->y_player + MIN_DISTANCE_FROM_WALL * w->y_step;
+            }
+            w->ray_distance = distance;
+            w->player_direction = set_directions(py, px, w);
+            w->ray_position = (int)(w->ray_position * (1000.0 / 64.0)) % 1000;
+            break;
+        }
+        px += w->x_step;
+        py += w->y_step;
+    }
+    render_3d_view(correct_distance(w, angle), x, w, w->player_direction);
 }
 
 void	render_3d_view(double distance, int height, t_mlx *mlx, char playerdir)

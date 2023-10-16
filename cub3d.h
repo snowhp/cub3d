@@ -29,7 +29,7 @@
 // Angle increment in degrees for rotation
 # define ROTATION_ANGLE_INCREMENT	10.0
 // // Amount of pixels to move in each step
-# define PIXELS_PER_MOVE	10.0
+# define PIXELS_PER_MOVE	5.0
 # define W 119
 # define A 97
 # define S 115

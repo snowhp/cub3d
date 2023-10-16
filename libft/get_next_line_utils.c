@@ -1,77 +1,73 @@
 #include "libft.h"
 
-static int	min_mal(int a, int b)
+size_t	ft_strclen(const char *s, int c)
 {
-	if (a < b)
-		return (a);
-	return (b);
-}
+	size_t	i;
 
-char	*ft_substr2(char const *s, unsigned int start, size_t len)
-{
-	unsigned int	index;
-	unsigned int	len_sub_str;
-	char			*ptr;
-
-	index = 0;
+	i = 0;
 	if (!s)
 		return (0);
-	if (start >= ft_strlen(s))
-	{
-		ptr = malloc(1);
-		ptr[0] = 0;
-		return (ptr);
-	}
-	len_sub_str = min_mal(ft_strlen(s) - start, len);
-	ptr = malloc(len_sub_str + 1);
-	if (ptr == NULL)
-		return (0);
-	while (index < len_sub_str && s[index] != '\0')
-	{
-		ptr[index] = s[index + start];
-		index++;
-	}
-	ptr[index] = '\0';
-	return (ptr);
+	while (s[i] && s[i] != c)
+		i++;
+	return (i);
 }
 
-static char	*ft_strcat_p(char *dest, const char *src, int position)
+char	*ft_strchr_mod(const char *s, int c)
 {
-	int	len;
-	int	i;
+	size_t	i;
 
-	len = 0;
 	i = 0;
-	while (dest[i] != '\0' && position != 0)
-		i++;
-	while (src[len] != '\0')
+	if (!s)
+		return (NULL);
+	while (s[i])
 	{
-		dest[i] = src[len];
+		if (s[i] == c)
+			return ((char *)s + i);
 		i++;
-		len++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (NULL);
 }
 
-char	*ft_strjjoin(char *s1, char *s2)
+char	*ft_strndup(const char *s, size_t n)
 {
-	//int		index;
-	int		length;
-	char	*ptr;
+	char	*dup;
+	size_t	i;
 
-	if (!s1)
+	i = 0;
+	dup = (char *)malloc(n + 1);
+	if (!dup)
+		return (NULL);
+	while (s[i] && i < n)
 	{
-		s1 = malloc(1);
-		s1[0] = '\0';
+		dup[i] = s[i];
+		i++;
 	}
-	//index = 0;
-	length = ft_strlen(s1) + ft_strlen(s2);
-	ptr = malloc(length + 1);
-	if (ptr == NULL)
-		return (0);
-	ft_strcat_p(ptr, s1, 0);
-	ft_strcat_p(ptr, s2, 1);
-	free(s1);
-	return (ptr);
+	dup[i] = '\0';
+	return (dup);
+}
+
+char	*ft_strjoin_mod(char *s1, const char *s2)
+{
+	size_t	i;
+	size_t	size;
+	char	*res;
+
+	i = 0;
+	size = 0;
+	if (s1)
+		size = ft_strclen(s1, '\0');
+	size += ft_strclen(s2, '\0') + 1;
+	res = (char *)malloc(size);
+	if (!res)
+		return (NULL);
+	if (s1)
+		while (s1[i])
+			*(res++) = s1[i++];
+	res -= ft_strclen(s1, '\0');
+	while (*s2)
+		res[i++] = *(s2++);
+	res[i] = '\0';
+	if (s1)
+		free(s1);
+	return (res);
 }
