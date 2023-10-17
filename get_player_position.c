@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:59 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/09/11 15:24:57 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:42:55 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	get_player_position(t_mlx *window)
 			{
 				point_of_view(window, window->map[i][j]);
 				window->map[i][j] = '0';
-				window->y_player = i * 64;
-				window->x_player = j * 64;
+				window->y_player = i * 64 + 25;
+				window->x_player = j * 64 + 25;
 				break ;
 			}
 			j++;
