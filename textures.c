@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:36:53 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/13 10:11:13 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:37:07 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*get_path_check(char *line, char *ser)
 	if (fd == -1)
 	{
 		printf("\033[1;33mERROR: Could not open texture.\033[0m\n");
+		free(line);
 		exit(0);
 	}
 	close(fd);
