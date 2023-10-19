@@ -32,7 +32,7 @@ NAME = cub3D
 LIBFT = ./libft/libft.a
 INCLUDES = includes
 
-SRC = 	check_map.c colors.c error_msg.c initialization.c map_reading.c parsing.c position_map.c textures.c utils.c get_player_position.c imag_to_xpm.c projection.c projection_utils.c directions.c projections_textures.c control_keys.c moves.c minimap.c
+SRC = 	check_map.c colors.c error_msg.c initialization.c map_reading.c parsing.c position_map.c textures.c utils.c get_player_position.c imag_to_xpm.c projection.c projection_utils.c directions.c projections_textures.c control_keys.c moves.c moves2.c minimap.c
 
 SRC-OBJ = $(SRC:.c=.o)
 

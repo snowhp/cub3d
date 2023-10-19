@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_reading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:37:52 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/14 21:44:51 by firibeir         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:19:11 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	process_map_line(t_parsing *parsing, t_index *index, char *line)
 	if (parsing->north_path == 0 || parsing->south_path == 0
 		|| parsing->west_path == 0 || parsing->east_path == 0)
 	{
-		printf("\033[0;33mError: Missing texture path at line %d\033[0m\n",\
+		printf("\033[0;33mError: Missing texture path at line %d\033[0m\n", \
 			index->texture_count);
 		exit(0);
 	}
@@ -47,32 +47,31 @@ void	get_info_map(t_parsing *parsing,
 	}
 	else
 		free(aux);
-	//free(line);
 }
 
-void read_map(char *file, t_parsing *parsing)
+void	read_map(char *file, t_parsing *parsing)
 {
-    char *lines;
-    int fd;
-    int textures_nbr;
-    t_index number;
+	char	*lines;
+	int		fd;
+	int		textures_nbr;
+	t_index	number;
+	char	*trimmed_lines;
 
-    textures_nbr = 0;
-    initialize_index(&number);
-    fd = open(file, O_RDONLY);
-    while (1)
-    {
-        lines = get_next_line(fd);
-        if (lines == 0)
-            break;
-        if (lines[0] == '\n' && number.map_index != 0)
-            error_map(parsing);
-        char *trimmed_lines = ft_strtrim(lines, "\n");
-        get_info_map(parsing, trimmed_lines, &number, &textures_nbr);
-        free(trimmed_lines);
-        free(lines); // Liberar a memória original
-    }
-    parsing->map[number.map_index] = 0;
-    validate_map_and_player(parsing);
+	textures_nbr = 0;
+	initialize_index(&number);
+	fd = open(file, O_RDONLY);
+	while (1)
+	{
+		lines = get_next_line(fd);
+		if (lines == 0)
+			break ;
+		if (lines[0] == '\n' && number.map_index != 0)
+			error_map(parsing);
+		trimmed_lines = ft_strtrim(lines, "\n");
+		get_info_map(parsing, trimmed_lines, &number, &textures_nbr);
+		free(trimmed_lines);
+		free(lines);
+	}
+	parsing->map[number.map_index] = 0;
+	validate_map_and_player(parsing);
 }
-

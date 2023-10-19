@@ -259,7 +259,7 @@ void	put_minimap(t_mlx *window);
 int	game_loop(t_mlx *window);
 void	hooks(t_mlx *window);
 int	destroy_window(t_mlx *window);
-
+int	is_wall_detector(t_mlx *window, int minus, double y_step, double x_step);
 
 
 //testers

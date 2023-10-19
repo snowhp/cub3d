@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 09:55:32 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/14 21:58:38 by firibeir         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:18:35 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void	load_extra(t_mlx *window)
 		&window->display_data.endian);
 }
 
+void	parsing_initializer(t_parsing	*parsing)
+{
+	parsing->north_path = NULL;
+	parsing->south_path = NULL;
+	parsing->west_path = NULL;
+	parsing->east_path = NULL;
+	parsing->map = NULL;
+	if (parsing == NULL)
+		printf("Memory allocation failed");
+}
+
 int	main(int argc, char **argv)
 {
 	t_parsing	*parsing;
@@ -46,14 +57,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		parsing = malloc(sizeof(t_parsing));
-		parsing->north_path = NULL;
-		parsing->south_path = NULL;
-		parsing->west_path = NULL;
-		parsing->east_path = NULL;
-		parsing->map = NULL;
-		
-		if (parsing == NULL)
-			printf("Memory allocation failed");
+		parsing_initializer(parsing);
 		parse_cub_file(argc, argv, parsing);
 		window.parsing = parsing;
 		window.map = parsing->map;

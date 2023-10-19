@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firibeir <firibeir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 14:38:03 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/14 21:57:13 by firibeir         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:02:31 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	error_map(t_parsing *parsing)
 {
+	size_t	i;
+
+	i = 0;
 	if (parsing->north_path)
 		free(parsing->north_path);
 	if (parsing->south_path)
@@ -22,14 +25,12 @@ void	error_map(t_parsing *parsing)
 		free(parsing->west_path);
 	if (parsing->east_path)
 		free(parsing->east_path);
-
-	if (parsing->map) {
-		size_t i = 0;
+	if (parsing->map)
+	{
 		while (parsing->map[i] != NULL)
 			free(parsing->map[i++]);
 		free(parsing->map);
 	}
-	
 	free(parsing);
 	printf("\033[1;31mError: \033[0m\n");
 	printf("\033[1;31mMap Parsing Failed.\033[0m\n");
