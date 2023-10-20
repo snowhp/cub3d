@@ -1,1 +1,0 @@
-char	*ft_strjjoin(char *s1, char *s2)
