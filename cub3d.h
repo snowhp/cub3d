@@ -6,7 +6,7 @@
 /*   By: tde-sous <tde-sous@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:55:56 by tde-sous          #+#    #+#             */
-/*   Updated: 2023/10/19 15:59:36 by tde-sous         ###   ########.fr       */
+/*   Updated: 2023/10/20 09:53:04 by tde-sous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include <X11/keysym.h>
 
 # ifdef __APPLE__
-# include "mlx_macos/mlx.h"
+#  include "mlx_macos/mlx.h"
 # else
-# include "mlx_linux/mlx.h"
+#  include "mlx_linux/mlx.h"
 # endif
 
 //	Video Resolution
@@ -113,62 +113,62 @@ typedef struct s_texture_data
 
 typedef struct s_mlx
 {
-	void		*mlx;
-	void		*window;
-	char		**map;
-	int			width;
-	int			height;
-
-	char		*north_texture_path;
-	char		*south_texture_path;
-	char		*east_texture_path;
-	char		*west_texture_path;
-
-	char		*n_xpm;
-	char		*s_xpm;
-	char		*e_xpm;
-	char		*w_xpm;
-	void		*tile;
-	void		*tree;
-	void		*north_char;
-	void		*south_char;
-	void		*east_char;
-	void		*west_char;
-
-	double		player_view;
-
-	double		x_player;
-	double		y_player;
-
-	double		x_step;
-	double		y_step;
-
-	int			x_m;
-	int			y_m;
-
-	char		player_direction;
-	int			up;
-	int			down;
-	int			left;
-	int			right;
-	int			rot_l;
-	int			rot_r;
-
-	double		ray_distance;
-	double		corrected_distance;
-
-	int			ceiling_color;
-	int			floor_color;
-
-	double		ray_position;
-
-	double		distance_to_projection;
-	double		projection_3d;
-	double		floor_ceiling_origin;
-	char		*color;
-
-	t_parsing	*parsing;
 	t_texture_data	display_data;
+	void			*mlx;
+	void			*window;
+	char			**map;
+	int				width;
+	int				height;
+
+	char			*north_texture_path;
+	char			*south_texture_path;
+	char			*east_texture_path;
+	char			*west_texture_path;
+
+	char			*n_xpm;
+	char			*s_xpm;
+	char			*e_xpm;
+	char			*w_xpm;
+	void			*tile;
+	void			*tree;
+	void			*north_char;
+	void			*south_char;
+	void			*east_char;
+	void			*west_char;
+
+	double			player_view;
+
+	double			x_player;
+	double			y_player;
+
+	double			x_step;
+	double			y_step;
+
+	int				x_m;
+	int				y_m;
+
+	char			player_direction;
+	int				up;
+	int				down;
+	int				left;
+	int				right;
+	int				rot_l;
+	int				rot_r;
+
+	double			ray_distance;
+	double			corrected_distance;
+
+	int				ceiling_color;
+	int				floor_color;
+
+	double			ray_position;
+
+	double			distance_to_projection;
+	double			projection_3d;
+	double			floor_ceiling_origin;
+	char			*color;
+
+	t_parsing		*parsing;
 }	t_mlx;
 
 // Check if the file ends with .cub.
